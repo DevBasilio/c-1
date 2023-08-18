@@ -1,0 +1,74 @@
+using System;
+using System.Collections.Generic;
+
+namespace ContadorDeProdutos
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int contador = 0;
+            List<string> produtos = new List<string>();
+
+            while (true)
+            {
+                Console.WriteLine("Contador de Produtos");
+                Console.WriteLine("1 - Adicionar produto");
+                Console.WriteLine("2 - Exibir contagem");
+                Console.WriteLine("3 - Exibir lista de produtos");
+                Console.WriteLine("4 - Remover último produto");
+                Console.WriteLine("5 - Sair");
+                Console.Write("Escolha uma opção: ");
+
+                int escolha = int.Parse(Console.ReadLine());
+
+                switch (escolha)
+                {
+                    case 1:
+                        Console.Write("Digite o nome do produto: ");
+                        string nomeProduto = Console.ReadLine();
+                        produtos.Add(nomeProduto);
+                        contador++;
+                        Console.WriteLine("Produto adicionado com sucesso.");
+                        break;
+
+                    case 2:
+                        Console.WriteLine($"Contagem atual de produtos: {contador}");
+                        break;
+
+                    case 3:
+                        Console.WriteLine("Lista de produtos adicionados:");
+                        foreach (string produto in produtos)
+                        {
+                            Console.WriteLine(produto);
+                        }
+                        break;
+
+                    case 4:
+                        if (produtos.Count > 0)
+                        {
+                            string ultimoProduto = produtos[produtos.Count - 1];
+                            produtos.RemoveAt(produtos.Count - 1);
+                            contador--;
+                            Console.WriteLine($"Produto '{ultimoProduto}' removido.");
+                        }
+                        else
+                        {
+                            Console.WriteLine("Nenhum produto para remover.");
+                        }
+                        break;
+
+                    case 5:
+                        Console.WriteLine("Saindo do programa.");
+                        return;
+
+                    default:
+                        Console.WriteLine("Opção inválida. Escolha novamente.");
+                        break;
+                }
+
+                Console.WriteLine();
+            }
+        }
+    }
+}
